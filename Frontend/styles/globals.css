@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+:root {
+  --clr-white: rgb(255, 255, 255);
+  --clr-black: rgb(0, 0, 0);
+  --clr-light: rgb(245, 248, 255);
+  --clr-light-gray: rgb(196, 195, 196);
+  --clr-blue: rgb(63, 134, 255);
+  --clr-light-blue: rgb(171, 202, 255);
+}
+
+body {
+  font-family: "montserrat" !important;
+}
+/* Home Page */
+.parallax-container {
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.parallax-text {
+  height: 100%;
+}
+.parallax-title {
+  margin-top: 23%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: " montserrat";
+  color: #2b2b2b;
+}
+
+.projects-title {
+  font-family: " montserrat";
+  color: #2b2b2b;
+  font-size: 3.5rem;
+  margin-bottom: 40px;
+}
+
+.description {
+  font-size: 3rem;
+}
+.projects-list {
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+.contact-button {
+  margin-top: 8%;
+}
+
+.contact-button2 {
+  margin-bottom: 5%;
+}
+.features-list {
+  background: linear-gradient(to top, #ffffff, #dfecf9);
+}
+
+@media screen and (max-width: 1100px) and (max-height: 1400px) {
+  .parallax-container {
+    height: 35vh;
+  }
+}
+@media screen and (max-width: 1100px) and (max-height: 990px) {
+  .parallax-container {
+    height: 45vh;
+  }
+}
+@media screen and (max-width: 1100px) and (max-height: 800px) {
+  .parallax-container {
+    height: 60vh;
+  }
+}
+
+@media screen and (max-width: 1030px) {
+  .projects-title {
+    margin-top: 60px;
+    font-size: 3rem;
+  }
+  .description {
+    font-size: 2rem;
+  }
+}
+/* About Page */
+.about-title {
+  font-size: 3.5rem;
+  font-family: "montserrat";
+  color: #2b2b2b;
+}
+
+.about-text {
+  color: #2b2b2b;
+  text-align: justify;
+}
+@media screen and (max-width: 1030px) {
+  .about-title {
+    font-size: 3rem;
+  }
+  .about-text {
+    font-size: medium;
+  }
+}
+/* Contact Page */
+.contact-title {
+  font-size: 4rem;
+  font-family: " montserrat";
+  color: #2b2b2b;
+  padding: 2% 0 0 5%;
+}
+
+.contact-subtitle {
+  font-size: 2rem;
+  font-family: " montserrat";
+  color: #2b2b2b;
+  padding: 0 5% 2% 5%;
+}
+
+.contact-form {
+  margin-bottom: 2%;
+  margin-top: 40px;
+}
+
+/* Color Visualizer Page */
+.colorvisualiser__container__left h1 {
+  font-weight: 500;
+  color: #05308b;
+}
+.colorvisualiser__color_button {
+  width: 50px;
+  height: 50px;
+  border: 0px;
+}
+.colorvisualiser__color_button--active {
+  border: 4px solid #000000;
+  width: 50px;
+  height: 50px;
+}
+.colorvisualiser__color_button:hover {
+  border: 4px solid #eba206;
+}
+
+.colorvisualiser__texture_button > img:hover {
+  border: 4px solid #eba206;
+}
+
+.colorvisualiser__texture_button > img {
+  border-radius: 5px;
+  overflow: hidden;
+}
+.colorvisualiser__currtexture_button {
+  border: 4px solid #0a0a0a;
+  border-radius: 10%;
+
+  overflow: hidden;
+}
+.colorvisualiser__copylink {
+  flex-grow: 1;
+}
+.colorvisualiser__copy_button {
+  background-color: #05308b;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.colorvisualiser__copy_button:hover,
+.colorvisualiser__copy_button:focus {
+  background-color: #eba206;
+}
+.colorvisualiser__share__icon {
+  background-color: #d7d7d7;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 30%;
+  cursor: pointer;
+}
+/* Some Global CSS For File upload */
+.file_details--open {
+  height: auto !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.uploaded_file--open {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.uploaded_file__info--active::after {
+  animation: progressMove 800ms ease-in-out;
+  animation-delay: 300ms;
+}
+
+@keyframes progressMove {
+  from {
+    width: 0%;
+    background-color: transparent;
+  }
+
+  to {
+    width: 100%;
+    background-color: var(--clr-blue);
+  }
+}
+.upload_area--open {
+  /* Slid Down Animation */
+  animation: slidDown 500ms ease-in-out;
+}
+
+@keyframes slidDown {
+  from {
+    height: 28.125rem; /* 450px */
+  }
+
+  to {
+    height: 32rem; /* 560px */
+  }
+}
+.drop_zoon--over {
+  border-color: var(--clr-blue);
+}
+
+/* Tools Global CSS */
+.baseimagecontainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.baseImage {
+  width: 100%;
+  height: 100%;
+  object-position: center;
+}
+.maskImage {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0.4;
+  filter: grayscale(100%);
+  pointer-events: none;
+}
+
+.appliedImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: var(--opacity);
+
+  pointer-events: none;
+}

@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "name": "sofa",
+        "image": "images/sofa.jpg",
+        "image_embedding": "image_embedding/sofa_embedding.npy"
+    },
+    {
+        "id": 2,
+        "name": "lakeshore",
+        "image": "images/lakeshore.jpg",
+        "image_embedding": "image_embedding/lakeshore_embedding.npy"
+    },
+    {
+        "id": 3,
+        "name": "livingroom",
+        "image": "images/about.jpg",
+        "image_embedding": "image_embedding/about_embedding.npy"
+    },
+    {
+        "id": 4,
+        "name": "babyroom",
+        "image": "images/baby-room.jpg",
+        "image_embedding": "image_embedding/babyroom_embedding.npy"
+    },
+    {
+        "id": 5,
+        "name": "mountain",
+        "image": "images/mountain.jpg",
+        "image_embedding": "image_embedding/mountain_embedding.npy"
+    },
+    {
+        "id": 6,
+        "name": "oasis",
+        "image": "images/oasis.jpg",
+        "image_embedding": "image_embedding/oasis_embedding.npy"
+    },
+    {
+        "id": 7,
+        "name": "cozy",
+        "image": "images/cozy.jpg",
+        "image_embedding": "image_embedding/cozy_embedding.npy"
+    },
+    {
+        "id": 8,
+        "name": "Gondola",
+        "image": "images/gondola.jpg",
+        "image_embedding": "image_embedding/gondola_embedding.npy"
+    },
+    {
+        "id": 9,
+        "name": "woods",
+        "image": "images/woods.jpg",
+        "image_embedding": "image_embedding/woods_embedding.npy"
+    },
+    {
+        "id": 10,
+        "name": "light",
+        "image": "images/light.png",
+        "image_embedding": "image_embedding/light_embedding.npy"
+    },
+    {
+        "id": 11,
+        "name": "living",
+        "image": "images/living.jpg",
+        "image_embedding": "image_embedding/living_embedding.npy"
+    },
+    {
+        "id": 12,
+        "name": "color",
+        "image": "images/color.jpg",
+        "image_embedding": "image_embedding/color_embedding.npy"
+    }
+]
