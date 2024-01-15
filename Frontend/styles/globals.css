@@ -121,6 +121,9 @@ body {
 }
 
 /* Color Visualizer Page */
+.colorvisualiser {
+  background-color: #e8e8e8;
+}
 .colorvisualiser__container__left h1 {
   font-weight: 500;
   color: #05308b;

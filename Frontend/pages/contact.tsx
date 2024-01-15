@@ -1,15 +1,16 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { useState } from "react";
-import { init, send } from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import Footer from "../components/Footer/Footer";
 import NavBar from "../components/NavBar/NavBar";
+import { ToastContainer, toast } from "react-toastify";
 
 function Contact() {
-  const USER_ID = process.env.REACT_APP_USER_ID;
+  const USER_ID = process.env.NEXT_PUBLIC_EMAILJS_USERID;
   // init(USER_ID);
-  const SERVICE_ID = process.env.REACT_APP_SERVICE_ID;
-  const TEMPLATE_ID = process.env.REACT_APP_TEMPLATE_ID;
+  const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICEID;
+  const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATEID;
 
   const [toSend, setToSend] = useState({
     user_name: "",
@@ -27,30 +28,58 @@ function Contact() {
 
   const onSubmit = (event: any) => {
     event.preventDefault();
-    // send(SERVICE_ID, TEMPLATE_ID, toSend, USER_ID)
-    //   .then((response) => {
-    //     console.log("SUCCESS!", response.status, response.text);
-    //   })
-    //   .catch((err) => {
-    //     console.log("FAILED...", err);
-    //   });
-    // setToSend({
-    //   user_name: "",
-    //   user_email: "",
-    //   user_message: "",
-    // });
-    alert("Message sent!");
+    console.log(toSend, USER_ID, SERVICE_ID, TEMPLATE_ID);
+    if (
+      SERVICE_ID === undefined ||
+      TEMPLATE_ID === undefined ||
+      USER_ID === undefined
+    ) {
+      return;
+    }
+    //validate email
+    const email = toSend.user_email;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Invalid email!");
+      return;
+    }
+    //validate mobile number
+    const mobile = toSend.user_number;
+    const mobileRegex = /^\d{10}$/;
+    if (!mobileRegex.test(mobile)) {
+      toast.error("Invalid mobile number!");
+      return;
+    }
+
+    emailjs
+      .send(SERVICE_ID, TEMPLATE_ID, toSend, USER_ID)
+      .then((response) => {
+        console.log("SUCCESS!", response.status, response.text);
+        toast.success("Message sent!");
+      })
+      .catch((err) => {
+        console.log("FAILED...", err);
+        toast.error("Message not sent!");
+      });
+
+    setToSend({
+      user_name: "",
+      user_email: "",
+      user_message: "",
+      user_number: "",
+    });
   };
   return (
     <>
       <NavBar />
+
       <Container fluid className="p-0 py-4 ">
         <h2 className="contact-subtitle text-center">
           Any questions? Contact us!
         </h2>
 
         <Container className=" contact-form col-md-8">
-          <form className="needs-validation " onSubmit={onSubmit} noValidate>
+          <form className="needs-validation " noValidate>
             <Container className="mb-3">
               <label htmlFor="validationCustom01" className="form-label p-text">
                 Name{" "}
@@ -113,6 +142,7 @@ function Contact() {
             <button
               type="submit"
               className="btn btn-secondary btn-lg px-5 m-2 me-sm-3"
+              onClick={onSubmit}
             >
               Send
             </button>

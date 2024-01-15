@@ -18,6 +18,7 @@ import {
   imageDataToImage,
   scaleTexture,
   downloadImage,
+  processTexture,
 } from "../utils/helpers/maskUtils";
 import { modelData } from "../utils/helpers/onnxModelAPI";
 import Stage from "../components/Stage";
@@ -299,6 +300,7 @@ const ColorVisualiser = (props: any) => {
           if (!scaledTexture) return;
           if (scaledTexture instanceof HTMLImageElement) {
             setTexture(scaledTexture);
+            toast.success("Texture Selected");
           }
           setColor(null);
         });
@@ -342,7 +344,6 @@ const ColorVisualiser = (props: any) => {
         "https://api.cloudinary.com/v1_1/dbvxdjjpr/image/upload",
         formData
       );
-
       const data = await res.data;
       await Share.share({
         title: "Aakar",
@@ -374,6 +375,7 @@ const ColorVisualiser = (props: any) => {
       );
 
       const data = await res.data;
+
       await handleCloseLoader();
       await setShareURL(data.url);
     }
@@ -391,8 +393,7 @@ const ColorVisualiser = (props: any) => {
     <>
       {!file && <NavBar />}
       {file && <NavBar1 handleClose={handleClose} />}
-      <div className="colorvisualiser py-5 pb-5">
-        <ToastContainer />
+      <div className={`${file ? "colorvisualiser" : ""} py-5 pb-5`}>
         {!file && (
           <div className="colorvisualiser__container container py-md-2 py-lg-5">
             <div className="row justify-content-center align-items-center gap-5 gap-lg-0">
@@ -495,6 +496,7 @@ const ColorVisualiser = (props: any) => {
                           className="colorvisualiser__button"
                           onClick={() => {
                             downloadImage(image!);
+                            toast.success("Image Downloaded");
                           }}
                         >
                           <IoIosCloudDownload size={20} />
@@ -533,6 +535,7 @@ const ColorVisualiser = (props: any) => {
                               style={{ backgroundColor: color.hex }}
                               onClick={() => {
                                 setColor(color.hex);
+                                toast.success("Color Selected");
                                 setTexture(null);
                               }}
                             ></Button>
@@ -658,10 +661,7 @@ const ColorVisualiser = (props: any) => {
                       <div
                         className="colorvisualiser__share__icon"
                         onClick={() => {
-                          window.open(
-                            `https://www.linkedin.com/shareArticle?mini=true&url=${shareURL}`,
-                            "_blank"
-                          );
+                          window.open(`tg://msg_url?url=${shareURL}`);
                         }}
                       >
                         <FontAwesomeIcon icon={faLinkedin} size="2x" />
@@ -708,6 +708,7 @@ const ColorVisualiser = (props: any) => {
                   onClick={() => {
                     setColor(colour.hex);
                     setTexture(null);
+                    toast.success("Color Selected");
                     handleCloseColorModal();
                   }}
                 >
@@ -745,15 +746,17 @@ const ColorVisualiser = (props: any) => {
                   </Card.Body>
                 </Card>
                 <div className="uploadimage">
-                  <div className="fw-bold mt-3 ">Upload Texture</div>
-                  <div className="previewimage mt-3">
+                  <div className="fw-bold mt-3 ">
+                    <h4 className="d-inline fw-bold">Upload Texture</h4>
+                  </div>
+                  <div className="previewimage mt-3 text-center">
                     {textureFile ? (
                       <Image
                         src={textureFile.src}
                         className="img-fluid"
                         alt="Texture"
-                        width={200}
-                        height={200}
+                        width={300}
+                        height={300}
                       />
                     ) : (
                       <FaImage
@@ -780,14 +783,31 @@ const ColorVisualiser = (props: any) => {
                       }
                     }}
                   />
-                  <Button
-                    className="mt-3"
-                    onClick={async (e) => {
-                      textureFileRef.current?.click();
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faUpload} size="1x" /> Upload Image
-                  </Button>
+                  <div className="d-flex justify-content-center align-items-center flex-wrap gap-2">
+                    <Button
+                      className="mt-3"
+                      onClick={async (e) => {
+                        textureFileRef.current?.click();
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faUpload} size="1x" /> Upload Image
+                    </Button>
+                    <Button
+                      className="mt-3"
+                      onClick={() => {
+                        processTexture(textureFile, image).then((texture) => {
+                          if (texture instanceof HTMLImageElement) {
+                            setTexture(texture);
+                            setColor(null);
+                            toast.success("Texture Selected");
+                            handleCloseOffCanvas();
+                          }
+                        });
+                      }}
+                    >
+                      Select Texture
+                    </Button>
+                  </div>
                 </div>
               </Offcanvas.Body>
             </Offcanvas>

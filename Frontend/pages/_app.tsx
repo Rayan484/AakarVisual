@@ -4,12 +4,11 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 import "/styles/globals.css";
 import type { AppProps } from "next/app";
-import NavBar from "../components/NavBar/NavBar";
-import Footer from "../components/Footer/Footer";
 import * as ort from "onnxruntime-web";
 import { useEffect, useState } from "react";
 import AppContextProvider from "../utils/hooks/context";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function App({ Component, pageProps }: AppProps) {
   const [model, setModel] = useState<ort.InferenceSession | null>();
   useEffect(() => {
@@ -28,7 +27,15 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <AppContextProvider>
-        <Component {...pageProps} model={model} />
+        <>
+          <ToastContainer
+            position="bottom-left"
+            progressStyle={{ visibility: "hidden" }}
+            autoClose={1000}
+          />
+
+          <Component {...pageProps} model={model} />
+        </>
       </AppContextProvider>
     </>
   );

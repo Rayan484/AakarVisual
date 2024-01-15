@@ -6,6 +6,7 @@
 import { Tensor } from "onnxruntime-web";
 // @ts-ignore
 import npyjs from "npyjs";
+import axios from "axios";
 // Convert the onnx model mask prediction to ImageData
 export function arrayToImageData(input: any, width: number, height: number) {
   const [r, g, b, a] = [0, 114, 189, 255]; // the masks's blue color
@@ -211,4 +212,51 @@ export const downloadImage = (image: HTMLImageElement) => {
   link.href = image.src;
   link.click();
 };
-// share image by uploading to firebase storage
+// Upload image on Cloudinary
+export const uploadImage = async (image: HTMLImageElement) => {
+  const formData = new FormData();
+  formData.append("file", image!.src);
+  formData.append("upload_preset", "d5mvumcd");
+  formData.append("cloud_name", "dbvxdjjpr");
+  const res = await axios.post(
+    "https://api.cloudinary.com/v1_1/dbvxdjjpr/image/upload",
+    formData
+  );
+  const data = await res.data;
+  return data;
+};
+// process texture image
+export const processTexture = async (
+  texture: HTMLImageElement,
+  baseImage: HTMLImageElement | null
+) => {
+  if (!baseImage) {
+    return;
+  }
+  return new Promise((resolve, reject) => {
+    try {
+      const img = document.createElement("img");
+      img.src = texture.src;
+      // resize image to h=123 , w=140
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d")!;
+        canvas.width = 140;
+        canvas.height = 123;
+        ctx.drawImage(img, 0, 0, 140, 123);
+        const dataURL = canvas.toDataURL("image/png");
+        const image = document.createElement("img");
+        image.src = dataURL;
+        image.onload = () => {
+          resolve;
+          scaleTexture(baseImage, image).then((scaledTexture) => {
+            resolve(scaledTexture);
+          });
+        };
+      };
+    } catch (err) {
+      console.log(err);
+      reject(err);
+    }
+  });
+};
