@@ -80,11 +80,12 @@ const Tool = (props: any) => {
           )}
           {!props.showSlider && (
             <Image
+              data-intro="For PC, You can hover over the image to see the mask and apply Color,Texture by Clicking Once. For mobile, you can tap on the image to see the mask and apply Color,Texture by Double Tapping."
+              data-step="6"
               onMouseMove={handleMouseMove}
               onDoubleClick={handleMouseClick}
               onMouseOut={() => _.defer(() => setMaskImg(null))}
               onTouchMove={handleMouseMove}
-              onTouchStart={handleMouseClick}
               src={image.src}
               alt="Image"
               width={image.width}

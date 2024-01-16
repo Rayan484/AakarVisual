@@ -9,6 +9,8 @@ import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/css";
 import { modelScaleProps } from "../utils/helpers/Interfaces";
 import { Share } from "@capacitor/share";
+import introJs from "intro.js";
+import "intro.js/introjs.css";
 import {
   onnxMaskToImage,
   loadNpyTensor,
@@ -113,6 +115,7 @@ const ColorVisualiser = (props: any) => {
         setTensor(embedding);
       });
       handleCloseModal();
+      introJs().setOption("dontShowAgain", true).start();
     } catch (e) {
       handleCloseModal();
       setError(
@@ -212,6 +215,7 @@ const ColorVisualiser = (props: any) => {
         });
         setTimeout(() => {
           handleCloseModal();
+          introJs().setOption("dontShowAgain", true).start();
         }, 1500);
       };
     });
@@ -454,8 +458,8 @@ const ColorVisualiser = (props: any) => {
         {file && (
           <>
             <div className="colorvisualiser__container container-fluid m-0 p-0">
-              <div className="row m-0 p-0 ">
-                <div className="col-12 col-lg-8 colorvisualiser__container__left ">
+              <div className="row m-0 p-0 align-items-center">
+                <div className="col-12 col-lg-8 colorvisualiser__container__left">
                   <Stage
                     handleShowLoader={handleShowLoader}
                     applyColor={applyColor}
@@ -464,9 +468,13 @@ const ColorVisualiser = (props: any) => {
                     showSlider={showSlider}
                   />
                 </div>
-                <div className="col-12 col-lg-4 colorvisualiser__container__right mt-3 mt-sm-0">
+                <div className="col-12 col-lg-4 colorvisualiser__container__right mt-3 mt-lg-0">
                   <div className="colorvisualiser__tools_container mb-4">
-                    <Card className="border-2 shadow-sm">
+                    <Card
+                      className="border-2 shadow-sm"
+                      data-intro="Tools where you can undo , redo , reset , compare, download and share your image"
+                      data-step="1"
+                    >
                       <Card.Body className="d-flex   justify-content-between align-items-center ">
                         <Button
                           className="colorvisualiser__button"
@@ -520,11 +528,15 @@ const ColorVisualiser = (props: any) => {
                           <Button
                             className="p-0  colorvisualiser__color_button--active"
                             style={{ backgroundColor: color }}
+                            data-intro="Selected Color will be shown here"
+                            data-step="2"
                           ></Button>
                         ) : (
                           <FaImage
                             className=" colorvisualiser__color_button"
                             style={{ color: "#000" }}
+                            data-intro="Selected Color will be shown here"
+                            data-step="2"
                           />
                         )}
                         {colordata.map((color: any, index: number) => {
@@ -545,6 +557,8 @@ const ColorVisualiser = (props: any) => {
                         <Button
                           className="colorvisualiser__color_addbutton"
                           onClick={handleShowColorModal}
+                          data-intro="You can also add any color from color pallete"
+                          data-step="3"
                         >
                           <FontAwesomeIcon icon={faPlus} size="2x" />
                         </Button>
@@ -568,9 +582,16 @@ const ColorVisualiser = (props: any) => {
                               alt="Texture"
                               width={90}
                               height={90}
+                              data-intro="Selected Texture will be shown here"
+                              data-step="4"
                             />
                           ) : (
-                            <IoMdImage size={90} style={{ color: "#000" }} />
+                            <IoMdImage
+                              size={90}
+                              style={{ color: "#000" }}
+                              data-intro="Selected Texture will be shown here"
+                              data-step="4"
+                            />
                           )}
                         </Button>
                         {texturedata
@@ -595,6 +616,8 @@ const ColorVisualiser = (props: any) => {
                         <Button
                           className=" border-0 colorvisualiser__texture_button"
                           onClick={handleShowOffCanvas}
+                          data-intro="Have any texture in mind ? You can upload it here"
+                          data-step="5"
                         >
                           <FontAwesomeIcon icon={faPlus} size="2x" />
                         </Button>
@@ -746,8 +769,14 @@ const ColorVisualiser = (props: any) => {
                   </Card.Body>
                 </Card>
                 <div className="uploadimage">
-                  <div className="fw-bold mt-3 ">
-                    <h4 className="d-inline fw-bold">Upload Texture</h4>
+                  <div className=" mt-3 ">
+                    <h4 className=" fw-bold">Upload Texture</h4>
+                    <div>
+                      <ul>
+                        <li>Max allowed size 1 MB</li>
+                        <li>Will Auto Resize to Default size</li>
+                      </ul>
+                    </div>
                   </div>
                   <div className="previewimage mt-3 text-center">
                     {textureFile ? (
