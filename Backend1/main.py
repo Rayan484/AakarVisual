@@ -18,6 +18,11 @@ CORS(app, expose_headers=["Content-Disposition"])
 def home():
     return "Hello, World !!"
 
+@app.route('/test',methods=['POST'])
+def testpost():
+    imagfile=flask.request.files['image']
+    print(imagfile)
+    return "Image Recieved"
 
 @app.route('/getembedding', methods=['POST'])
 @cross_origin(origin='*')
