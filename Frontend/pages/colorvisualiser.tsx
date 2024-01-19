@@ -107,9 +107,7 @@ const ColorVisualiser = (props: any) => {
         "https://sam-0ofk.onrender.com/getembedding",
         formData,
         {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
+          AccessControlAllowOrigin: "*",
           responseType: "arraybuffer",
         }
       );

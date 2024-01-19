@@ -10,7 +10,7 @@ encoder_path = "models/sam_vit_b_encoder.onnx"
 encoder_session = onnxruntime.InferenceSession(
     encoder_path, providers=['CPUExecutionProvider'])
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.route('/', methods=['GET'])
