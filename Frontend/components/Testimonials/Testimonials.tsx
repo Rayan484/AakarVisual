@@ -84,7 +84,6 @@ const Testimonial = (props: any) => {
         })}
         <div
           className={`${styles["quotes-img"]} ${styles["quotes-img-left"]}`}
-          // {console.log(styles["quotes-img"])}
         />
       </div>
       <div ref={refButtonsParentDiv}>

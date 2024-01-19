@@ -315,7 +315,6 @@ const FileUpload = (props: any) => {
               lastModified: compressedFile.lastModified,
             });
             cropImage(3 / 2, compfile).then((image) => {
-              console.log(image);
               props.setFile(image);
               props.getEmbedding(image);
             });

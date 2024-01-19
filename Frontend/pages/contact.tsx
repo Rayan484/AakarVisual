@@ -28,7 +28,6 @@ function Contact() {
 
   const onSubmit = (event: any) => {
     event.preventDefault();
-    console.log(toSend, USER_ID, SERVICE_ID, TEMPLATE_ID);
     if (
       SERVICE_ID === undefined ||
       TEMPLATE_ID === undefined ||
@@ -54,7 +53,6 @@ function Contact() {
     emailjs
       .send(SERVICE_ID, TEMPLATE_ID, toSend, USER_ID)
       .then((response) => {
-        console.log("SUCCESS!", response.status, response.text);
         toast.success("Message sent!");
       })
       .catch((err) => {
