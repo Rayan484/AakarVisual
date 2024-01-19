@@ -104,7 +104,7 @@ const ColorVisualiser = (props: any) => {
     await scrollTo(0, 0);
     try {
       const res = await axios.post(
-        "https://efe5-120-138-121-250.ngrok-free.app/getembedding",
+        "https://3423-120-138-121-250.ngrok-free.app/getembedding",
         formData,
         {
           responseType: "arraybuffer",
