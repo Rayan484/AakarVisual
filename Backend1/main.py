@@ -1,4 +1,4 @@
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from flask import Flask, send_file
 from PIL import Image
 import flask
@@ -10,15 +10,17 @@ encoder_path = "models/sam_vit_b_encoder.onnx"
 encoder_session = onnxruntime.InferenceSession(
     encoder_path, providers=['CPUExecutionProvider'])
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app)
 
 
 @app.route('/', methods=['GET'])
+@cross_origin(origin='*')
 def home():
     return "Hello, World !!"
 
 
 @app.route('/getembedding', methods=['POST'])
+@cross_origin(origin='*')
 def getembedding1():
     imagefile = flask.request.files['image']
     img = Image.open(imagefile)
