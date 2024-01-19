@@ -107,6 +107,9 @@ const ColorVisualiser = (props: any) => {
         ` ${process.env.NEXT_PUBLIC_BACKEND_URL}/get_embedding`,
         formData,
         {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
           responseType: "arraybuffer",
         }
       );
