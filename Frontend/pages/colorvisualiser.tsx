@@ -107,10 +107,6 @@ const ColorVisualiser = (props: any) => {
         ` ${process.env.NEXT_PUBLIC_BACKEND_URL}/get_embedding`,
         formData,
         {
-          headers: {
-            "Access-Control-Allow-Origin": "https://sam-0ofk.onrender.com",
-            "Access-Control-Allow-Methods": "POST",
-          },
           responseType: "arraybuffer",
         }
       );

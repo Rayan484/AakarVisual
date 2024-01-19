@@ -10,7 +10,7 @@ encoder_path = "models/sam_vit_b_encoder.onnx"
 encoder_session = onnxruntime.InferenceSession(
     encoder_path, providers=['CPUExecutionProvider'])
 app = Flask(__name__)
-CORS(app,origins=['http://localhost:3000','https://sam-two-peach.vercel.app/'])
+CORS(app, expose_headers=["Content-Disposition"])
 
 
 @app.route('/', methods=['GET'])
@@ -43,24 +43,20 @@ def getembedding1():
         (input_size[1], input_size[0]),
         flags=cv2.INTER_LINEAR,
     )
-    print(cv_image.shape)
     encoder_inputs = {
         "input_image": cv_image.astype(np.float32),
     }
-    print(encoder_inputs)
     output = encoder_session.run(None, encoder_inputs)
     if output is not None:
         output = output[0]
-    print(output)
     image_embedding = output
-    # a = np.random.randint(1000)
-    # if not os.path.exists("Embeddings"):
-    #     os.makedirs("Embeddings")
-    # file_path ="Embeddings\image_embedding"+str(a)+".npy"
-    # np.save(file_path, image_embedding)
-    # print("image_embedding"+str(a)+".npy")
-    # return send_file(file_path, mimetype='application/octet-stream', as_attachment=True)
-    return flask.jsonify({"data": image_embedding.tolist()})
+    a = np.random.randint(1000)
+    if not os.path.exists("Embeddings"):
+        os.makedirs("Embeddings")
+    file_path ="Embeddings\image_embedding"+str(a)+".npy"
+    np.save(file_path, image_embedding)
+    print("image_embedding"+str(a)+".npy")
+    return send_file(file_path, mimetype='application/octet-stream', as_attachment=True)
 
 
 if (__name__ == '__main__'):
