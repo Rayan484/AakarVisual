@@ -26,4 +26,5 @@
 * More Accurate
 * require python>=3.8 and torch
 
-# Demo Collab file for onnx model 
+# Demo Collab file name `Backend1_Demo`
+* Use it for running Flask in Kaggle or Collab using ngrok to make api for generating embedding
