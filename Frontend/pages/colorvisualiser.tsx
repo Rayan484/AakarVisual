@@ -104,9 +104,13 @@ const ColorVisualiser = (props: any) => {
     await scrollTo(0, 0);
     try {
       const res = await axios.post(
-        "https://3423-120-138-121-250.ngrok-free.app/getembedding",
+        "https://sam-0ofk.onrender.com/getembedding",
         formData,
         {
+          headers: {
+            "Access-Control-Allow-Origin": "https://sam-0ofk.onrender.com",
+            "Access-Control-Allow-Methods": "POST",
+          },
           responseType: "arraybuffer",
         }
       );
