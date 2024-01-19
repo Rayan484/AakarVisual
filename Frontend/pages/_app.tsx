@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const initmodel = async () => {
       const session = await ort.InferenceSession.create(
-        "./_next/static/chunks/pages/sam_vit_h_decoder.onnx",
+        "./_next/static/chunks/pages/sam_vit_b_decoder.onnx",
         {
           executionProviders: ["wasm"],
         }
