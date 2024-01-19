@@ -58,6 +58,7 @@ import { Capacitor } from "@capacitor/core";
 import Footer from "../components/Footer/Footer";
 import NavBar from "../components/NavBar/NavBar";
 import NavBar1 from "../components/NavBar/NavBar1";
+import { Tensor } from "onnxruntime-web";
 const ColorVisualiser = (props: any) => {
   // const [color, setColor] = useColor("hex", "#121212");
   const {
@@ -104,19 +105,25 @@ const ColorVisualiser = (props: any) => {
     await scrollTo(0, 0);
     try {
       const res = await axios.post(
-        ` ${process.env.NEXT_PUBLIC_BACKEND_URL}/get_embedding`,
-        formData,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-          responseType: "arraybuffer",
-        }
+        ` ${process.env.NEXT_PUBLIC_BACKEND_URL}/getembedding`,
+        formData
       );
       const data = await res.data;
-      Promise.resolve(loadNpyTensor1(data, "float32")).then((embedding) => {
-        setTensor(embedding);
-      });
+
+      // convert data into float32 array
+      for (let i = 0; i < data.length; i++) {
+        for (let j = 0; j < data[i].length; j++) {
+          for (let k = 0; k < data[i][j].length; k++) {
+            for (let l = 0; l < data[i][j][k].length; l++) {
+              data[i][j][k][l] = parseFloat(data[i][j][k][l]);
+            }
+          }
+        }
+      }
+      const data2 = data.flat(Infinity);
+      const data1 = new Float32Array(data2);
+      const tensor = new Tensor("float32", data1, [1, 256, 64, 64]);
+      setTensor(tensor);
       handleCloseModal();
       introJs().setOption("dontShowAgain", true).start();
     } catch (e) {
@@ -303,7 +310,6 @@ const ColorVisualiser = (props: any) => {
       img.src = texture.url;
       img.onload = () => {
         scaleTexture(image, img).then((scaledTexture) => {
-          console.log(scaledTexture);
           if (!scaledTexture) return;
           if (scaledTexture instanceof HTMLImageElement) {
             setTexture(scaledTexture);
@@ -318,14 +324,12 @@ const ColorVisualiser = (props: any) => {
   };
   const handleUndo = () => {
     const image = undoRedo!.undo();
-    console.log(image);
     if (image instanceof HTMLImageElement) {
       setImage(image);
     }
   };
   const handleRedo = () => {
     const image = undoRedo!.redo();
-    console.log(image);
     if (image instanceof HTMLImageElement) {
       setImage(image);
     }

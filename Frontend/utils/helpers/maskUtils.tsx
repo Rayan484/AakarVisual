@@ -101,9 +101,7 @@ export const cropImage = async (aspectRatio: number, file: File) => {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d")!;
       const imageAspectRatio = img.width / img.height;
-      console.log("image", img.width, img.height);
       let renderableHeight, renderableWidth, xStart, yStart;
-      console.log(imageAspectRatio, aspectRatio);
       if (imageAspectRatio > aspectRatio) {
         renderableHeight = img.height;
         renderableWidth = img.height * aspectRatio;
@@ -122,7 +120,6 @@ export const cropImage = async (aspectRatio: number, file: File) => {
       }
       canvas.width = renderableWidth;
       canvas.height = renderableHeight;
-      console.log(renderableWidth, renderableHeight);
       ctx.drawImage(
         img,
         xStart,
@@ -136,7 +133,6 @@ export const cropImage = async (aspectRatio: number, file: File) => {
       );
       const fimg = canvas.toDataURL("image/jpeg", 1.0);
       convertURLtoFile(fimg, "cropped.jpg").then((file) => {
-        console.log(file);
         resolve(file);
       });
     };
@@ -185,7 +181,6 @@ export const scaleTexture = async (
       canvas.width = baseImg.width;
 
       canvas.height = baseImg.height;
-      console.log(canvas.width, canvas.height, img.width, img.height);
       const ctx = canvas.getContext("2d")!;
       // repeat texture image to scale to base image size
       const pattern = ctx.createPattern(img, "repeat")!;
