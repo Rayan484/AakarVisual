@@ -2,7 +2,7 @@
 * Upload Image of Room
 * Select a color from the suggested color or choose any color from the color palette
 * Select a texture from a given texture or upload your texture
-* Now Repaint any wall, ceiling, floor, or any part ( In PC, hover over the image to see the mask and click once to apply color or texture & In Touch Devices, tap once to see mask and double tap to apply texture or color)
+* Now Repaint any wall, ceiling, floor, or any part ( In PC, hover over the image to see the mask and click once to apply color or texture & In Touch Devices, tap once to see the mask and double tap to apply texture or color)
 * Tools for Editing Images ex. Redo, Undo, Reset, Download, Share, or compare with the initial image
 * Try Preloaded Images 
 
@@ -29,7 +29,7 @@
 
 
 # Backend2 
-* using SAM encoder of vit_h (2.6 GB) 
+* using SAM encoder of vit_h (2.6 GB) [VIT_H](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth)
 * Takes around 2 Min to generate Image Embedding
 * More Accurate
 * require python>=3.8 and torch
