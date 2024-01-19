@@ -23,6 +23,7 @@ def home():
 @cross_origin(origin='*')
 def getembedding1():
     imagefile = flask.request.files['image']
+    print(imagefile)
     img = Image.open(imagefile)
     cv_image = np.array(img)
     input_size = (684, 1024)
@@ -42,6 +43,7 @@ def getembedding1():
         (input_size[1], input_size[0]),
         flags=cv2.INTER_LINEAR,
     )
+    print(cv_image.shape)
     encoder_inputs = {
         "input_image": cv_image.astype(np.float32),
     }
