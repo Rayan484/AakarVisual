@@ -50,6 +50,8 @@ def getembedding1():
         output = output[0]
     image_embedding = output
     a = np.random.randint(1000)
+    if not os.path.exists("Embeddings"):
+        os.makedirs("Embeddings")
     file_path ="Embeddings\image_embedding"+str(a)+".npy"
     np.save(file_path, image_embedding)
     print("image_embedding"+str(a)+".npy")
