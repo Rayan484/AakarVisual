@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function App({ Component, pageProps }: AppProps) {
   const [model, setModel] = useState<ort.InferenceSession | null>();
+  const [vithModel, setVithModel] = useState<ort.InferenceSession | null>();
   useEffect(() => {
     const initmodel = async () => {
       const session = await ort.InferenceSession.create(
@@ -19,7 +20,13 @@ export default function App({ Component, pageProps }: AppProps) {
           executionProviders: ["wasm"],
         }
       );
-
+      const vithsession = await ort.InferenceSession.create(
+        "./_next/static/chunks/pages/sam_vit_h_decoder.onnx",
+        {
+          executionProviders: ["wasm"],
+        }
+      );
+      setVithModel(vithsession);
       setModel(session);
     };
     initmodel();
@@ -34,7 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
             autoClose={1000}
           />
 
-          <Component {...pageProps} model={model} />
+          <Component {...pageProps} model={model} vithModel={vithModel} />
         </>
       </AppContextProvider>
     </>

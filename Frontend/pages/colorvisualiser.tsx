@@ -70,7 +70,7 @@ const ColorVisualiser = (props: any) => {
     texture: [texture, setTexture],
     initialImage: [initialImage, setInitialImage],
   } = useContext(AppContext)!;
-  const { model } = props;
+  const { model, vithModel } = props;
   const fileInput = useRef<HTMLInputElement>(null);
   const textureFileRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<any>(null);
@@ -85,6 +85,7 @@ const ColorVisualiser = (props: any) => {
   const [showSlider, setShowSlider] = useState<boolean>(false);
   const [shareURL, setShareURL] = useState<string>("");
   const [colour, setColour] = useColor("#561ecb");
+  const [type, setType] = useState<boolean>(false);
   const handleShowModal = () => setShowModal(true);
   const handleShowLoader = () => setShowLoader(true);
   const handleCloseModal = () => setShowModal(false);
@@ -99,6 +100,7 @@ const ColorVisualiser = (props: any) => {
 
   const getImageEmbedding = async (file: any) => {
     handleShowModal();
+    setType(false);
     const formData = new FormData();
     formData.append("image", file);
     await loadImage(file);
@@ -186,13 +188,22 @@ const ColorVisualiser = (props: any) => {
         });
         if (feeds === undefined) return;
         // Run the SAM ONNX model with the feeds returned from modelData()
-        const results = await model.run(feeds);
-        const output = results[model.outputNames[0]];
-        // The predicted mask returned from the ONNX model is an array which is
-        // rendered as an HTML image using onnxMaskToImage() from maskUtils.tsx.
-        setMaskImg(
-          onnxMaskToImage(output.data, output.dims[2], output.dims[3])
-        );
+        if (!type) {
+          const results = await model.run(feeds);
+          const output = results[model.outputNames[0]];
+
+          // The predicted mask returned from the ONNX model is an array which is
+          // rendered as an HTML image using onnxMaskToImage() from maskUtils.tsx.
+          setMaskImg(
+            onnxMaskToImage(output.data, output.dims[2], output.dims[3])
+          );
+        } else {
+          const results = await vithModel.run(feeds);
+          const output = results[vithModel.outputNames[0]];
+          setMaskImg(
+            onnxMaskToImage(output.data, output.dims[2], output.dims[3])
+          );
+        }
       }
     } catch (e) {
       console.log(e);
@@ -200,7 +211,7 @@ const ColorVisualiser = (props: any) => {
   };
   const handlePreloadedImage = (imagedetail: any) => {
     handleShowModal();
-
+    setType(true);
     convertURLtoFile(imagedetail.image, imagedetail.name).then((file) => {
       setFile(file);
       const image = document.createElement("img");
