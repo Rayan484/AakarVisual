@@ -33,6 +33,10 @@
 * Takes around 2 Min to generate Image Embedding
 * More Accurate
 * require python>=3.8 and torch
+* Running Locally
+  * Download checkpoint and place it to Backend2/
+  * RUN same as backend1 
 
-# Demo Collab file name `Backend1_Demo`
+## Demo Collab file name `Backend1_Demo`
 * Use it for running Flask in Kaggle or Collab using ngrok to make api for generating embedding
+* Paste URL of flask to .env.local in frontend `NEXT_PUBLIC_BACKEND_URL`
