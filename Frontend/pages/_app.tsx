@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import AppContextProvider from "../utils/hooks/context";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Analytics } from "@vercel/analytics/react";
 export default function App({ Component, pageProps }: AppProps) {
   const [model, setModel] = useState<ort.InferenceSession | null>();
   const [vithModel, setVithModel] = useState<ort.InferenceSession | null>();
@@ -42,6 +43,7 @@ export default function App({ Component, pageProps }: AppProps) {
           />
 
           <Component {...pageProps} model={model} vithModel={vithModel} />
+          <Analytics />
         </>
       </AppContextProvider>
     </>
