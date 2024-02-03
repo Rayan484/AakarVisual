@@ -237,7 +237,7 @@ const ColorVisualiser = (props: any) => {
         setTimeout(() => {
           handleCloseModal();
           introJs().setOption("dontShowAgain", true).start();
-        }, 1500);
+        }, 3000);
       };
     });
   };
@@ -861,7 +861,12 @@ const ColorVisualiser = (props: any) => {
           </>
         )}
         {showModal && file && (
-          <Modal show={showModal} onHide={handleCloseModal} centered>
+          <Modal
+            show={showModal}
+            onHide={handleCloseModal}
+            centered
+            backdrop="static"
+          >
             <Modal.Body>
               <div className="d-flex justify-content-between align-items-center ps-3">
                 <Image
