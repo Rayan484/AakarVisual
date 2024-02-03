@@ -38,3 +38,5 @@ next-env.d.ts
 # Android and ios
 /android
 /ios
+
+.vercel
