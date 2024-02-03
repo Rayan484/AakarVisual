@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useContext, useEffect, useRef } from "react";
 import Modal from "react-bootstrap/Modal";
 import texturedata from "../utils/texturedata.json";
