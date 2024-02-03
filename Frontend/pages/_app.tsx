@@ -2,7 +2,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
-// config.autoAddCss = false;
+config.autoAddCss = false;
 import "/styles/globals.css";
 import type { AppProps } from "next/app";
 import * as ort from "onnxruntime-web";
@@ -42,7 +42,6 @@ export default function App({ Component, pageProps }: AppProps) {
             progressStyle={{ visibility: "hidden" }}
             autoClose={1000}
           />
-
           <Component {...pageProps} model={model} vithModel={vithModel} />
           <Analytics />
         </>
