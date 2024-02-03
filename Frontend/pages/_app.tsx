@@ -1,4 +1,3 @@
-"use client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -8,7 +7,7 @@ import type { AppProps } from "next/app";
 import * as ort from "onnxruntime-web";
 import { useEffect, useState } from "react";
 import AppContextProvider from "../utils/hooks/context";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react";
 export default function App({ Component, pageProps }: AppProps) {

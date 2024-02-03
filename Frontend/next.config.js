@@ -3,6 +3,11 @@ const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
+  env: {
+    REACT_APP_USER_ID: "",
+    REACT_APP_SERVICE_ID: "",
+    REACT_APP_TEMPLATE_ID: "",
+  },
   reactStrictMode: true,
   swcMinify: true,
   output: "export",
