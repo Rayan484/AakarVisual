@@ -17,6 +17,7 @@
     "@capacitor/share": "^5.0.6",
     "@cloudinary/react": "^1.11.2",
     "@cloudinary/url-gen": "^1.14.0",
+    "@ducanh2912/next-pwa": "^10.2.5",
     "@emailjs/browser": "^3.12.1",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-brands-svg-icons": "^6.5.1",

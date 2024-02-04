@@ -1,13 +1,18 @@
 /** @type {import('next').NextConfig} */
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-
-module.exports = {
-  env: {
-    REACT_APP_USER_ID: "",
-    REACT_APP_SERVICE_ID: "",
-    REACT_APP_TEMPLATE_ID: "",
+const withPWA = require("@ducanh2912/next-pwa").default({
+  dest: "public",
+  cacheOnFrontEndNav: true,
+  aggresiveFrontEndNavCaching: true,
+  reloadOnOnline: true,
+  swcMinify: true,
+  disable: false,
+  workboxOptions: {
+    disableDevLogs: true,
   },
+});
+module.exports = withPWA({
   reactStrictMode: true,
   swcMinify: true,
   output: "export",
@@ -52,4 +57,4 @@ module.exports = {
 
     return config;
   },
-};
+});
