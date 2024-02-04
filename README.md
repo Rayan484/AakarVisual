@@ -1,4 +1,9 @@
-# Features 
+## Deployed 
+  - [![Netlify Status](https://api.netlify.com/api/v1/badges/cf4e0f96-1f57-4550-8d57-7607717d6938/deploy-status)](https://app.netlify.com/sites/omprakashchoudhary/deploys): [aakarvisual.netlify.app](https://aakarvisual.netlify.app)
+  - ![Vercel Status](https://camo.githubusercontent.com/4e591aad0c01cde89db7155c22ea1a8191a5f3452460039fabaa19a479dceffc/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6465706c6f796d656e74732f6a616b656a61727669732f6a6172762e69732f70726f64756374696f6e3f6c6162656c3d76657263656c266c6f676f3d76657263656c266c6f676f436f6c6f723d7768697465): [omseervi098.vercel.app](https://omseervi098.vercel.app) , [aakarvisual.vercel.app](https://aakarvisual.vercel.app)
+    
+
+## Features 
 * Upload Image of Room
 * Select a color from the suggested color or choose any color from the color palette
 * Select a texture from a given texture or upload your texture
@@ -6,7 +11,7 @@
 * Tools for Editing Images ex. Redo, Undo, Reset, Download, Share, or compare with the initial image
 * Try Preloaded Images 
 
-# Frontend 
+### Frontend 
 * Running Locally 
   * Add `.env.local` file to `frontend`
   * `NEXT_PUBLIC_BACKEND_URL` (Backend url)
@@ -16,7 +21,7 @@
   *  `npm run dev`
 
 
-# Backend1
+## Backend1
 * Using ONNX models of sam encoder of vit_b (92 MB)
 * Takes around <30 sec to generate Image Embedding
 * requires python>=3.8
@@ -28,7 +33,7 @@
   * `python main.py`
 
 
-# Backend2 
+## Backend2 
 * using SAM encoder of vit_h (2.6 GB) [VIT_H](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth)
 * Takes around 2 Min to generate Image Embedding
 * More Accurate
