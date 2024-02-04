@@ -10,7 +10,6 @@ import AppContextProvider from "../utils/hooks/context";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react";
-import { Metadata, Viewport } from "next";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [model, setModel] = useState<ort.InferenceSession | null>();
