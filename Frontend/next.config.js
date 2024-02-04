@@ -4,7 +4,10 @@ const CopyPlugin = require("copy-webpack-plugin");
 const withPWA = require("@ducanh2912/next-pwa").default({
   dest: "public",
   cacheOnFrontEndNav: true,
-  aggresiveFrontEndNavCaching: true,
+  aggressiveFrontEndNavCaching: true,
+  cacheStartUrl: true,
+  dynamicStartUrl: true,
+
   reloadOnOnline: true,
   swcMinify: true,
   disable: false,
