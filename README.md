@@ -10,7 +10,7 @@
 * Now Repaint any wall, ceiling, floor, or any part ( In PC, hover over the image to see the mask and click once to apply color or texture & In Touch Devices, tap once to see the mask and double tap to apply texture or color)
 * Tools for Editing Images ex. Redo, Undo, Reset, Download, Share, or compare with the initial image
 * Try Preloaded Images 
-
+* Support for Caching and PWA App.
 ### Frontend 
 * Running Locally 
   * Add `.env.local` file to `frontend`
