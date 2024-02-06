@@ -7,7 +7,6 @@
 
 /Embeddings
 
-models/sam_vit_b_encoder.onnx
 
 models/sam_vit_l_encoder.onnx
 
