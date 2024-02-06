@@ -6,7 +6,7 @@ import numpy as np
 import cv2
 import os
 import onnxruntime
-encoder_path = "models/sam_vit_b_encoder.onnx"
+encoder_path = "https://github.com/omseervi098/sam/raw/main/Backend1/models/sam_vit_b_encoder.onnx"
 encoder_session = onnxruntime.InferenceSession(
     encoder_path, providers=['CPUExecutionProvider'])
 app = Flask(__name__)
