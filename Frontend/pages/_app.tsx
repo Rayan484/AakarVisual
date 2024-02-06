@@ -28,6 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
           executionProviders: ["wasm"],
         }
       );
+      console.log("model loaded", session, vithsession);
       setVithModel(vithsession);
       setModel(session);
     };
