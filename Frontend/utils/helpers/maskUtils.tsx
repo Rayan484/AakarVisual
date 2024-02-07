@@ -234,19 +234,33 @@ export const processTexture = async (
       img.src = texture.src;
       // resize image to h=123 , w=140
       img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d")!;
-        canvas.width = 140;
-        canvas.height = 123;
-        ctx.drawImage(img, 0, 0, 140, 123);
-        const dataURL = canvas.toDataURL("image/png");
-        const image = document.createElement("img");
-        image.src = dataURL;
-        image.onload = () => {
-          resolve;
-          scaleTexture(baseImage, image).then((scaledTexture) => {
-            resolve(scaledTexture);
-          });
+        const baseImg = document.createElement("img");
+        baseImg.src = baseImage.src;
+        baseImg.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d")!;
+          // take same aspect ratio of base image and decrease the size of texture image
+          const aspectRatio = baseImg.width / baseImg.height;
+          const textureAspectRatio = img.width / img.height;
+          if (textureAspectRatio > aspectRatio) {
+            canvas.width = baseImg.width;
+            canvas.height = (baseImg.width * img.height) / img.width;
+          } else {
+            canvas.height = baseImg.height;
+            canvas.width = (baseImg.height * img.width) / img.height;
+          }
+          canvas.width = canvas.width / 10;
+          canvas.height = canvas.height / 9;
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          const dataURL = canvas.toDataURL("image/png");
+          const image = document.createElement("img");
+          image.src = dataURL;
+          image.onload = () => {
+            resolve;
+            scaleTexture(baseImage, image).then((scaledTexture) => {
+              resolve(scaledTexture);
+            });
+          };
         };
       };
     } catch (err) {

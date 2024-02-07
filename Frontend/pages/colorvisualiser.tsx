@@ -228,6 +228,10 @@ const ColorVisualiser = (props: any) => {
         setImage(image);
         undoRedo.setImage(image);
         setInitialImage(image);
+        setTexture(null);
+        setMaskImg(null);
+        setTextureFile(null);
+        setColor("#121212");
         scrollTo(0, 0);
         Promise.resolve(
           loadNpyTensor(imagedetail.image_embedding, "float32")
@@ -325,6 +329,7 @@ const ColorVisualiser = (props: any) => {
           if (scaledTexture instanceof HTMLImageElement) {
             setTexture(scaledTexture);
             toast.success("Texture Selected");
+            handleCloseOffCanvas();
           }
           setColor(null);
         });
