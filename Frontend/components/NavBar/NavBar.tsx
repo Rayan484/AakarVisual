@@ -33,7 +33,7 @@ function NavBar(props: any) {
             </Link>
             <a
               className={`m-2 ${styles.navlink} ${styles.github}`}
-              href="https://github.com/omseervi098/Aakar-Color-Visualizer"
+              href="https://github.com/omseervi098/Aakar-SAM"
               target="_blank"
               rel="noopener"
             >
