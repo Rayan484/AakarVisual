@@ -45,3 +45,6 @@
 ## Demo Collab file name `Backend1_Demo`
 * Use it for running Flask in Kaggle or Collab using ngrok to make api for generating embedding
 * Paste URL of flask to .env.local in frontend `NEXT_PUBLIC_BACKEND_URL`
+
+
+This is just for Demonstration purpose.
