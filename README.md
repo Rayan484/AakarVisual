@@ -1,6 +1,6 @@
 # AAkar
 
-- A ```Color Visualizer``` where users can upload image of the room and can try different colors and textures.
+- A ```Paint Visualizer``` where users can upload image of the room and can try different colors and textures.
 - This Project was built during 24 hour hackathon codeshashtra 9.0 organised by DJCSI.
 
 
